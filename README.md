@@ -7,12 +7,12 @@
    </P>
    <ul>
     <li>Libraries needed:</li> 
-      <ol type="a">
+      <ul>
         <li>pandas</li> <li>matplotlib</li> <li>numpy</li> <li>fbprophet</li>
-      </ol>
+      </ul>
     <li>Uncomment:</li>
-      <ol type="1">
+      <ul>
         <li>m.plot(fcst) to plot each forecast (not a good idea for lots of wells)</li>
-      </ol>
+      </ul>
     </ul>
 </body>
