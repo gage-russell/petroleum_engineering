@@ -7,7 +7,7 @@
    </P>
    <ul>
     <li>Libraries needed:</li> 
-      <ol type="1">
+      <ol type="A">
         <li>pandas</li> <li>matplotlib</li> <li>numpy</li> <li>fbprophet</li>
       </ol>
     <li>Uncomment:</li>
