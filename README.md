@@ -3,7 +3,7 @@
 <p><h3><b>fbprophet_DCA2.0.py</b></h3></p>
 <body>
   <p><b>Summary:</b><br>
-  Does decline curve analysis for any number of wells downloaded as production time series csv from drillinginfo (download the production   time series csv from drillinginfo for any number of wells and leave it exactly as is). Only thing to change is path to file.Currently     trying to decide how to best add graphing/visualization features.
+  Does decline curve analysis for any number of wells downloaded as production time series csv from drillinginfo (download the production   time series csv from drillinginfo for any number of wells and leave it exactly as is). Only thing to change is path to file. The most     important final output is stored in the 'prediction' variable, which will contain a dataframe for each well in the csv. One forecast       figure and one DCA figure will be saved for each well.
    </P>
    <ul>
     <li>Libraries needed:</li> 
@@ -13,6 +13,11 @@
     <li>Uncomment:</li>
       <ul>
         <li>m.plot(fcst) to plot each forecast (not a good idea for lots of wells)</li>
+      </ul>
+    <li>Figures:</li>
+      <ul>
+        <li>DCA [API#].png are the final DCA (Actual+Forecast) figures created and saved by the program (example used two wells)</li>
+        <li>fcst [API#].png are the forecast plots generated with fbprophet (example used two wells)</li>
       </ul>
     </ul>
 </body>
