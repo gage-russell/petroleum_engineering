@@ -14,6 +14,7 @@
     <li>Data Format:</li> 
       <ul>
         <li>Production Time Series csv from DrillingInfo AS-IS (any number of wells)</li>
+        <li>Example uses '2wellsGrady Production Time Series.csv'</li>
       </ul>
     <li>Uncomment:</li>
       <ul>
@@ -41,6 +42,7 @@
     <li>Data Format:</li> 
       <ul>
         <li>Production Headers csv from DrillingInfo AS-IS (any number of wells)</li>
+        <li>Example uses 'WellsTableGrady.csv'</li>
       </ul>
   <li>Figures:</li>
     <ul>
