@@ -11,6 +11,10 @@
       <ul>
         <li>pandas</li> <li>matplotlib</li> <li>numpy</li> <li>fbprophet</li>
       </ul>
+    <li>Data Format:</li> 
+      <ul>
+        <li>Production Time Series csv from DrillingInfo AS-IS (any number of wells)</li>
+      </ul>
     <li>Uncomment:</li>
       <ul>
         <li>m.plot(fcst) to plot each forecast (not a good idea for lots of wells)</li>
@@ -31,9 +35,13 @@
   </p>
   <ul>
     <li>Libraries needed:</li>
-    <ul>
-      <li>pandas</li> <li>matplotlib</li> <li>numpy</li> <li>sklearn</li> <li>folium</li>
-    </ul>
+      <ul>
+        <li>pandas</li> <li>matplotlib</li> <li>numpy</li> <li>sklearn</li> <li>folium</li>
+      </ul>
+    <li>Data Format:</li> 
+      <ul>
+        <li>Production Headers csv from DrillingInfo AS-IS (any number of wells)</li>
+      </ul>
   <li>Figures:</li>
     <ul>
       <li>res_fluid_clustermap.html is the output of the example ran using wells in Grady County clustered into four fluid types</li>
