@@ -54,7 +54,8 @@ for i in range(len(loopdf)):
     m.fit(loopdf[i])
     future = m.make_future_dataframe(periods=400, freq='M')
     fcst = m.predict(future)
-    #m.plot(fcst);
+    m.plot(fcst, ylabel='log(production) (bbl)', xlabel='time (yrs.)').savefig('fcst'+str(APIdf[i].API[0])+'.png')
+    
     
     new=fcst[['ds', 'yhat', 'yhat_upper', 'yhat_lower']].copy()
     new['y']=loopdf[i].y
@@ -78,4 +79,17 @@ for i in range(len(loopdf)):
     ult=max(prediction[i].cum)
     prediction[i]['EUR']=ult
     prediction[i]['API']=APIdf[i].API[0]
- 
+    
+    plt.ioff()
+    fig, ax1 = plt.subplots()
+    plot1,=ax1.plot(fcast[i].y[0:Ldf], label='actual')
+    plot2,=ax1.plot(fcast[i].yhat, color='black', linestyle=':', label='forecasted')
+    ax1.set_title(str(prediction[i].API[0])+' fbprophet Decline')
+    ax1.set_ylabel('Oil Production (bbl)')
+    ax1.set_xlabel('Date')
+    ax1.legend(handles=[plot1, plot2])
+    plt.savefig('DCA '+str(APIdf[i].API[0])+'.png')    
+    
+#C:/Users/Owner/Documents/Spring 2018/Capstone/ path for class.... IGNORE THIS
+        
+    
