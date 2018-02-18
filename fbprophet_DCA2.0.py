@@ -2,14 +2,14 @@
 """
 Created on Sat Feb 17 18:12:51 2018
 
-@author: Owner
+@author: Gage Russell
 """
 
 # -*- coding: utf-8 -*-
 """
 Created on Sat Feb 17 13:42:57 2018
 
-@author: Owner
+@author: Gage Russell
 """
 
 import pandas as pd
