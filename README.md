@@ -41,7 +41,7 @@
       </ul>
     <li>Data Format:</li> 
       <ul>
-        <li>Production Headers csv from DrillingInfo AS-IS (any number of wells)</li>
+        <li>Wells Table csv from DrillingInfo AS-IS (any number of wells)</li>
         <li>Example uses 'WellsTableGrady.csv'</li>
       </ul>
   <li>Figures:</li>
