@@ -16,8 +16,8 @@
       </ul>
     <li>Figures:</li>
       <ul>
-        <li>[API#]DCA.png are the final DCA (Actual+Forecast) figures created and saved by the program</li>
-        <li>fcst[API#].png are the forecast plots generated with fbprophet</li>
+        <li>[API#]DCA.png are the final DCA (Actual+Forecast) figures created and saved by the program (example used two wells)</li>
+        <li>fcst[API#].png are the forecast plots generated with fbprophet (example used two wells)</li>
       </ul>
     </ul>
 </body>
