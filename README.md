@@ -1,5 +1,6 @@
 # petroleum_engineering
 
+<h2>Folder: Decline Curve Analysis</h2><br>
 <p><h3><b>fbprophet_DCA2.0.py</b></h3></p>
 <body>
   <p><b>Summary:</b><br>
@@ -21,3 +22,22 @@
       </ul>
     </ul>
 </body>
+
+<h2>Folder: Reservoir Fluid Characterization</h2><br>
+<p><h3><b>Res_Fluid_Clustering.py</b></h3></p>
+<body>
+  <p><b>Summary:</b><br>
+  Uses KMeans clustering to characterize reservoir fluid types. This particular example creates three clusters and then further divides     the cluster with the lowest average initial GOR because it is dealing specifically with oil wells in Grady County producing from the       Woodford. Folium is used to map each well on an interactive map in the browser. 
+  </p>
+  <ul>
+    <li>Libraries needed:</li>
+    <ul>
+      <li>pandas</li> <li>matplotlib</li> <li>numpy</li> <li>sklearn</li> <li>folium</li>
+    </ul>
+  <li>Figures:</li>
+    <ul>
+      <li>res_fluid_clustermap.html is the output of the example ran using wells in Grady County clustered into four fluid types</li>
+    </ul>
+  </ul>
+  </body>
+  
