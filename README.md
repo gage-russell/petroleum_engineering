@@ -14,5 +14,10 @@
       <ul>
         <li>m.plot(fcst) to plot each forecast (not a good idea for lots of wells)</li>
       </ul>
+    <li>Figures:</li>
+      <ul>
+        <li>[API #]DCA.png are the final DCA (Actual+Forecast) figures created and saved by the program</li>
+        <li>fcst[API#].png are the forecast plots generated with fbprophet</li>
+      </ul>
     </ul>
 </body>
