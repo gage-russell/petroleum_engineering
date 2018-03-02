@@ -1,6 +1,7 @@
 # petroleum_engineering
 
-<h2>Folder: Decline Curve Analysis</h2>
+<h2>Main Folder: Decline Curve Analysis</h2>
+<p><h3>sub Folder: fbProphet_Decline</h3></p>
 <p><h3><b>fbprophet_DCA2.0.py</b></h3></p>
 <body>
   <p><b>Summary:</b><br>
@@ -27,6 +28,13 @@
       </ul>
     </ul>
 </body>
+<p><h3>sub Folder: fbProphet_Decline</h3></p>
+<p><h3><b>fbprophet_DCA2.0.py</b></h3></p>
+<body>
+  <p><b>Summary:</b><br>
+  Does exponential, hyperbolic, and harmonic DCA
+   </P>
+
 
 <h2>Folder: Reservoir Fluid Characterization</h2>
 <p><h3><b>Res_Fluid_Clustering.py</b></h3></p>
