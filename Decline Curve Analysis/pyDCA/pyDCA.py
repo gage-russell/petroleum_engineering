@@ -87,7 +87,7 @@ def exp_decline(Q, T, T_end=None, q_f=None, q_i=None, plot=False):
         T_to_end=range(T_end)
         total_pred_exp=exp_dec(T_to_end, a_exp[0])
         T_end_obs=max(T)
-        T_future=range(T_end_obs, T_end)
+        T_future=range(T_end_obs+1, T_end)
         future_pred_exp=exp_dec(T_future, a_exp[0])
         if plot==True:
             fig, ax = plt.subplots(1, figsize=(16, 16))
@@ -109,7 +109,7 @@ def exp_decline(Q, T, T_end=None, q_f=None, q_i=None, plot=False):
         q_pred=q_f+1
         while q_pred>q_f:
             T_iter_range=range(T_iter+1)
-            T_future_range=range(T_end_obs, T_iter+1)
+            T_future_range=range(T_end_obs+1, T_iter+1)
             total_pred_exp=exp_dec(T_iter_range, a_exp[0])
             future_pred_exp=exp_dec(T_future_range, a_exp[0])
             q_pred=total_pred_exp[T_iter]
@@ -772,3 +772,180 @@ eur, forecast_outputs, total_prediction=fbprophet_DCA(df)
 
 """
 
+"""
+#####################################################################################################
+STRETCHED EXPONENTIAL DECLINE (SINGLE WELL)
+#####################################################################################################
+"""
+def SE_decline(Q, T, T_end=None, q_f=None, q_i=None, plot=False):
+    if T_end!=None:
+        if q_f!=None:
+            raise Exception("One or the other dumb fuck")
+    if q_f!=None:
+        if T_end!=None:
+            raise Exception("One or the other dumb fuck")         
+    q_i=Q[0] 
+    def stretched_exponential_decline(q_i):
+        def SE_dec(T, t, n):
+            return q_i*np.exp(-np.power((T/t),n))
+        return SE_dec
+    SE_dec=stretched_exponential_decline(q_i)
+    a_SE, a_SE_cov=curve_fit(SE_dec, T, Q, method="trf")
+    pred_obs_SE=SE_dec(T, a_SE[0], a_SE[1])
+    if T_end!=None:
+        T_to_end=range(T_end)
+        total_pred_SE=SE_dec(T_to_end, a_SE[0], a_SE[1])
+        T_end_obs=max(T)
+        T_future=range(T_end_obs, T_end)
+        future_pred_SE=SE_dec(T_future, a_SE[0], a_SE[1])
+        if plot==True:
+            fig, ax = plt.subplots(1, figsize=(16, 16))
+            ax.set_title("Stretched Exponential Decline Curve Analysis", fontsize=30)
+            label_size = 20
+            yed = [tick.label.set_fontsize(label_size) for tick in ax.yaxis.get_major_ticks()]
+            xed = [tick.label.set_fontsize(label_size) for tick in ax.xaxis.get_major_ticks()]
+            ax.scatter(T, Q, color="black", marker="x", s=250, linewidth=3)
+            ax.set_xlabel("Time (mos.)", fontsize=25)
+            ax.set_ylabel("Oil Rate (1000 STB/d)", fontsize=25)
+            ax.plot(T_to_end, total_pred_SE, color="red", linewidth=5, alpha=0.5, label="Stretched Exponential")
+            ax.ticklabel_format(fontsize=25)
+            ax.legend(fontsize=25)
+            plt.show()
+        return pred_obs_SE, total_pred_SE, future_pred_SE, a_SE, a_SE_cov
+    elif q_f!=None:
+        T_end_obs=max(T)
+        T_iter=max(T)
+        q_pred=q_f+1
+        while q_pred>q_f:
+            T_iter_range=range(T_iter+1)
+            T_future_range=range(T_end_obs, T_iter+1)
+            total_pred_SE=SE_dec(T_iter_range, a_SE[0], a_SE[1])
+            future_pred_SE=SE_dec(T_future_range, a_SE[0], a_SE[1])
+            q_pred=total_pred_SE[T_iter]
+            T_iter+=1
+            T_to_end=T_iter_range
+        if plot==True:
+            fig, ax = plt.subplots(1, figsize=(16, 16))
+            ax.set_title("Stretched Exponential Decline Curve Analysis", fontsize=30)
+            label_size = 20
+            yed = [tick.label.set_fontsize(label_size) for tick in ax.yaxis.get_major_ticks()]
+            xed = [tick.label.set_fontsize(label_size) for tick in ax.xaxis.get_major_ticks()]
+            ax.scatter(T, Q, color="black", marker="x", s=250, linewidth=3)
+            ax.set_xlabel("Time (mos.)", fontsize=25)
+            ax.set_ylabel("Oil Rate (1000 STB/d)", fontsize=25)
+            ax.plot(T_to_end, total_pred_SE, color="red", linewidth=5, alpha=0.5, label="Stretched Exponential")
+            ax.ticklabel_format(fontsize=25)
+            ax.legend(fontsize=25)
+            plt.show()
+        return pred_obs_SE, total_pred_SE, future_pred_SE, a_SE, a_SE_cov
+    else:
+        if plot==True:
+                fig, ax = plt.subplots(1, figsize=(16, 16))
+                ax.set_title("Stretched Exponential Decline Curve Analysis", fontsize=30)
+                label_size = 20
+                yed = [tick.label.set_fontsize(label_size) for tick in ax.yaxis.get_major_ticks()]
+                xed = [tick.label.set_fontsize(label_size) for tick in ax.xaxis.get_major_ticks()]
+                ax.scatter(T, Q, color="black", marker="x", s=250, linewidth=3)
+                ax.set_xlabel("Time (mos.)", fontsize=25)
+                ax.set_ylabel("Oil Rate (1000 STB/d)", fontsize=25)
+                ax.plot(T, pred_obs_SE, color="red", linewidth=5, alpha=0.5, label="Stretched Exponential")
+                ax.ticklabel_format(fontsize=25)
+                ax.legend(fontsize=25)
+                plt.show()
+        return pred_obs_SE, a_SE, a_SE_cov
+    
+"""
+#####################################################################################################
+EXAMPLES OF STRETCHED EXPONENTIAL DCA
+#####################################################################################################
+a,b,c,d,e=SE_decline(Q, T, T_end=70, plot=True)
+"""
+
+"""
+#####################################################################################################
+POWER LAW EXPONENTIAL DECLINE (SINGLE WELL)
+#####################################################################################################
+"""
+def PLE_decline(Q, T, T_end=None, q_f=None, q_i=None, plot=False):
+    if T_end!=None:
+        if q_f!=None:
+            raise Exception("One or the other dumb fuck")
+    if q_f!=None:
+        if T_end!=None:
+            raise Exception("One or the other dumb fuck")         
+    q_i=Q[0] 
+    def stretched_exponential_decline(q_i):
+        def PLE_dec(T, D_inf, D, n):
+            return q_i*np.exp(-D_inf*T-D*np.power(T,n))
+        return PLE_dec
+    PLE_dec=stretched_exponential_decline(q_i)
+    a_PLE, a_PLE_cov=curve_fit(PLE_dec, T, Q, method="trf")
+    pred_obs_PLE=PLE_dec(T, a_PLE[0], a_PLE[1], a_PLE[2])
+    if T_end!=None:
+        T_to_end=range(T_end)
+        total_pred_PLE=PLE_dec(T_to_end, a_PLE[0], a_PLE[1], a_PLE[2])
+        T_end_obs=max(T)
+        T_future=range(T_end_obs, T_end)
+        future_pred_PLE=PLE_dec(T_future, a_PLE[0], a_PLE[1], a_PLE[2])
+        if plot==True:
+            fig, ax = plt.subplots(1, figsize=(16, 16))
+            ax.set_title("Power Law Exponential Decline Curve Analysis", fontsize=30)
+            label_size = 20
+            yed = [tick.label.set_fontsize(label_size) for tick in ax.yaxis.get_major_ticks()]
+            xed = [tick.label.set_fontsize(label_size) for tick in ax.xaxis.get_major_ticks()]
+            ax.scatter(T, Q, color="black", marker="x", s=250, linewidth=3)
+            ax.set_xlabel("Time (mos.)", fontsize=25)
+            ax.set_ylabel("Oil Rate (1000 STB/d)", fontsize=25)
+            ax.plot(T_to_end, total_pred_PLE, color="red", linewidth=5, alpha=0.5, label="Power Law Exponential")
+            ax.ticklabel_format(fontsize=25)
+            ax.legend(fontsize=25)
+            plt.show()
+        return pred_obs_PLE, total_pred_PLE, future_pred_PLE, a_PLE, a_PLE_cov
+    elif q_f!=None:
+        T_end_obs=max(T)
+        T_iter=max(T)
+        q_pred=q_f+1
+        while q_pred>q_f:
+            T_iter_range=range(T_iter+1)
+            T_future_range=range(T_end_obs, T_iter+1)
+            total_pred_PLE=PLE_dec(T_iter_range, a_PLE[0], a_PLE[1], a_PLE[2])
+            future_pred_PLE=PLE_dec(T_future_range, a_PLE[0], a_PLE[1], a_PLE[2])
+            q_pred=total_pred_PLE[T_iter]
+            T_iter+=1
+            T_to_end=T_iter_range
+        if plot==True:
+            fig, ax = plt.subplots(1, figsize=(16, 16))
+            ax.set_title("Power Law Exponential Decline Curve Analysis", fontsize=30)
+            label_size = 20
+            yed = [tick.label.set_fontsize(label_size) for tick in ax.yaxis.get_major_ticks()]
+            xed = [tick.label.set_fontsize(label_size) for tick in ax.xaxis.get_major_ticks()]
+            ax.scatter(T, Q, color="black", marker="x", s=250, linewidth=3)
+            ax.set_xlabel("Time (mos.)", fontsize=25)
+            ax.set_ylabel("Oil Rate (1000 STB/d)", fontsize=25)
+            ax.plot(T_to_end, total_pred_PLE, color="red", linewidth=5, alpha=0.5, label="Power Law Exponential")
+            ax.ticklabel_format(fontsize=25)
+            ax.legend(fontsize=25)
+            plt.show()
+        return pred_obs_PLE, total_pred_PLE, future_pred_PLE, a_PLE, a_PLE_cov
+    else:
+        if plot==True:
+                fig, ax = plt.subplots(1, figsize=(16, 16))
+                ax.set_title("Power Law Exponential Decline Curve Analysis", fontsize=30)
+                label_size = 20
+                yed = [tick.label.set_fontsize(label_size) for tick in ax.yaxis.get_major_ticks()]
+                xed = [tick.label.set_fontsize(label_size) for tick in ax.xaxis.get_major_ticks()]
+                ax.scatter(T, Q, color="black", marker="x", s=250, linewidth=3)
+                ax.set_xlabel("Time (mos.)", fontsize=25)
+                ax.set_ylabel("Oil Rate (1000 STB/d)", fontsize=25)
+                ax.plot(T, pred_obs_PLE, color="red", linewidth=5, alpha=0.5, label="Power Law Exponential")
+                ax.ticklabel_format(fontsize=25)
+                ax.legend(fontsize=25)
+                plt.show()
+        return pred_obs_PLE, a_PLE, a_PLE_cov
+
+"""
+#####################################################################################################
+EXAMPLES OF POWER LAW EXPONENTIAL DCA
+#####################################################################################################
+a,b,c,d,e=PLE_decline(Q, T, T_end=70, plot=True)
+"""
