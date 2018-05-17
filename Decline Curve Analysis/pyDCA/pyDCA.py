@@ -10,6 +10,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 from fbprophet import Prophet
+from scipy import stats
+
 
 """
 #####################################################################################################
@@ -949,3 +951,44 @@ EXAMPLES OF POWER LAW EXPONENTIAL DCA
 #####################################################################################################
 a,b,c,d,e=PLE_decline(Q, T, T_end=70, plot=True)
 """
+
+"""
+#####################################################################################################
+CLEANING MULTIPLES WELL DATA FROM ARPS DATA_FORMAT
+#####################################################################################################
+"""
+def clean_multi_well(loopdf):
+    T=[]
+    Q=[]
+    for i in range(len(loopdf)):
+        subs=round(len(loopdf[i])/5)
+        dfsub=[]
+        for j in range(round(len(loopdf[i])/subs)):
+            dfs=loopdf[i][j*subs:(j+1)*subs]
+            dfsub.append(dfs)
+        for j in range(len(dfsub)):
+            dfsub[j]=dfsub[j][(np.abs(stats.zscore(dfsub[j].Oil))<2)] 
+        loopdf[i]=pd.concat(dfsub)
+        t=np.array(loopdf[i].month)
+        q=np.array(loopdf[i].Oil)
+        T.append(t)
+        Q.append(q)
+
+        return loopdf, Q, T
+"""
+#####################################################################################################
+CLEANING SINGLE WELL DATA FROM ARPS DATA_FORMAT
+#####################################################################################################
+"""
+def clean_single_well(df):
+    subs=round(len(df)/5)
+    dfsub=[]
+    for i in range(round(len(df)/subs)):
+        dfs=df[i*subs:(i+1)*subs]
+        dfsub.append(dfs)
+    for i in range(len(dfsub)):
+        dfsub[i]=dfsub[i][(np.abs(stats.zscore(dfsub[i].Oil))<2)] 
+    df=pd.concat(dfsub)
+    T=np.array(df.month)
+    Q=np.array(df.Oil)
+    return df, Q, T
