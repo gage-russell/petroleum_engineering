@@ -23,7 +23,7 @@ def single_well_ARPS_data_format(data_path, Oil=True, Gas=False, start_from_max=
         if Oil==True:
             ddt=pd.read_csv(data_path)
             ddt=ddt[np.isfinite(ddt.Oil)]
-            maxidx=ddt[ddt.Oil==ddt.Oil.max()].index.values[0]
+            maxidx=ddt[ddt.Oil==ddt.Oil.max()].index.values[0]f
             df=ddt.iloc[maxidx:]
             df['month']=range(maxidx, len(ddt))
             T=np.array(df.month)
@@ -73,10 +73,10 @@ EXPONENTIAL (SINGLE WELL)
 def exp_decline(Q, T, T_end=None, q_f=None, q_i=None, plot=False):
     if T_end!=None:
         if q_f!=None:
-            raise Exception("One or the other dumb fuck")
+            raise Exception("One or the other")
     if q_f!=None:
         if T_end!=None:
-            raise Exception("One or the other dumb fuck")         
+            raise Exception("One or the other")         
     q_i=Q[0] 
     def exponential_decline(q_i):
         def exp_dec(T,a):
@@ -157,10 +157,10 @@ HYPERBOLIC (SINGLE WELL)
 def hyp_decline(Q, T, T_end=None, q_f=None, q_i=None, plot=False):
     if T_end!=None:
         if q_f!=None:
-            raise Exception("One or the other dumb fuck")
+            raise Exception("One or the other")
     if q_f!=None:
         if T_end!=None:
-            raise Exception("One or the other dumb fuck")         
+            raise Exception("One or the other")         
     q_i=Q[0]
     def hyperbolic_decline(q_i):
         def hyp_dec(T, a_i, b):
@@ -239,10 +239,10 @@ HARMONIC (SINGLE WELL)
 def har_decline(Q, T, T_end=None, q_f=None, q_i=None, plot=False):
     if T_end!=None:
         if q_f!=None:
-            raise Exception("One or the other dumb fuck")
+            raise Exception("One or the other")
     if q_f!=None:
         if T_end!=None:
-            raise Exception("One or the other dumb fuck")         
+            raise Exception("One or the other")         
     q_i=Q[0]
     def harmonic_decline(q_i):
         def har_dec(T, a_i):
@@ -481,10 +481,10 @@ MULTI-WELL EXPONENTIAL
 def multi_exp_decline(Q, T, T_end=None, q_f=None, q_i=None, plot=False):
     if T_end!=None:
         if q_f!=None:
-            raise Exception("One or the other dumb fuck")
+            raise Exception("One or the other")
     if q_f!=None:
         if T_end!=None:
-            raise Exception("One or the other dumb fuck") 
+            raise Exception("One or the other") 
             
     loop_pred_obs_exp=[]
     loop_a_exp=[]
@@ -527,10 +527,10 @@ MULTI-WELL HYPERBOLIC
 def multi_hyp_decline(Q, T, T_end=None, q_f=None, q_i=None, plot=False):
     if T_end!=None:
         if q_f!=None:
-            raise Exception("One or the other dumb fuck")
+            raise Exception("One or the other")
     if q_f!=None:
         if T_end!=None:
-            raise Exception("One or the other dumb fuck") 
+            raise Exception("One or the other") 
             
     loop_pred_obs_hyp=[]
     loop_a_hyp=[]
@@ -573,10 +573,10 @@ MULTI-WELL HARMONIC
 def multi_har_decline(Q, T, T_end=None, q_f=None, q_i=None, plot=False):
     if T_end!=None:
         if q_f!=None:
-            raise Exception("One or the other dumb fuck")
+            raise Exception("One or the other")
     if q_f!=None:
         if T_end!=None:
-            raise Exception("One or the other dumb fuck") 
+            raise Exception("One or the other") 
             
     loop_pred_obs_har=[]
     loop_a_har=[]
@@ -782,10 +782,10 @@ STRETCHED EXPONENTIAL DECLINE (SINGLE WELL)
 def SE_decline(Q, T, T_end=None, q_f=None, q_i=None, plot=False):
     if T_end!=None:
         if q_f!=None:
-            raise Exception("One or the other dumb fuck")
+            raise Exception("One or the other")
     if q_f!=None:
         if T_end!=None:
-            raise Exception("One or the other dumb fuck")         
+            raise Exception("One or the other")         
     q_i=Q[0] 
     def stretched_exponential_decline(q_i):
         def SE_dec(T, t, n):
@@ -871,10 +871,10 @@ POWER LAW EXPONENTIAL DECLINE (SINGLE WELL)
 def PLE_decline(Q, T, T_end=None, q_f=None, q_i=None, plot=False):
     if T_end!=None:
         if q_f!=None:
-            raise Exception("One or the other dumb fuck")
+            raise Exception("One or the other")
     if q_f!=None:
         if T_end!=None:
-            raise Exception("One or the other dumb fuck")         
+            raise Exception("One or the other")         
     q_i=Q[0] 
     def stretched_exponential_decline(q_i):
         def PLE_dec(T, D_inf, D, n):
